@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>AlpineJS</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        
+        <!-- use this URL to fetch JSON from
+        https://learnwebcode.github.io/json-example/pets-data.json
+        -->
+
+        <div class="d-flex justify-content-center align-items-center m-4">
+            <h3> Welcome to AlpineJS</h3>
+        </div>
+
+        <div class="all-pets" x-data="{pets: [], loadedYet: false}" x-init="{pets} = await (await fetch('https://learnwebcode.github.io/json-example/pets-data.json')).json(); loadedYet = true">
+            
+            <template x-if="!pets.length && loadedYet">
+                <p>Woops, you have no pets.</p>
+            </template>
+
+            <template x-for="(pet, index) in pets">
+                <div class="pet-card" x-data="{showAge: false}">
+                    <div class="pet-image">
+                        <img x-bind:src="pet.photo" />
+                    </div>
+                    <div class="pet-text">
+                        <h2 x-text="pet.name">Name Goes Here</h2>
+                        <p x-text="pet.species">Species: dog</p>
+                        <template x-if="pet.favFoods">
+                            <p>Favorite foods: <span x-html="pet.favFoods"></span></p>
+                        </template>
+                        
+                        <button x-on:click="showAge = !showAge" class="cool-button">Toggle Age</button>
+                        <span x-show="showAge" x-transition x-text="pet.birthYear">Contents...</span>
+
+                        <p>
+                            <button class="delete-pet" x-on:click="pets = pets.filter((pet, loopedIndex) => {
+                                return index != loopedIndex;
+                            })">Delete Pet</button>
+                        </p>
+                    </div>
+                </div>
+            </template>
+            
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

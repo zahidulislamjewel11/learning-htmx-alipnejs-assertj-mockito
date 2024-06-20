@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Todo List</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+
+        <div class="d-flex justify-content-center align-items-center m-4">
+            <h3> Welcome to HTMX</h3>
+        </div>
+
+        <span id="message" hx-swap-oob="true" th:text="${message}" th:fragment="message"></span>
+
+        <div class="container mt-5 w-75">
+            <h2 class="text-center mb-4">Todo List</h2>
+
+            <div class="shadow-sm p-4 mb-4 bg-light rounded">
+                <div th:replace="~{todo/todo-fragment :: searchForm}"></div>
+            </div>
+
+            <p class="text-center">Total Todos: <span id="todoCount" hx-swap-oob="true" th:text="${todoCount}"
+                    th:fragment="todoCount">0</span></p>
+
+
+            <div class="shadow-sm p-4 mb-4 bg-light rounded">
+                <div th:replace="~{todo/todo-fragment :: addTodoForm}"></div>
+            </div>
+
+            <div class="shadow-sm p-4 bg-light rounded">
+                <ul id="todoList" class="list-group" th:fragment="todoItems">
+                    <li th:each="todo, stat : ${todos}" th:id="${todo.id}"
+                        class="list-group-item d-flex justify-content-between align-items-center todo-item"
+                        hx-target="this" hx-swap="outerHTML">
+                        <span th:text="${todo.task}">Sample Task</span>
+                        <div class="link-container">
+                            <a href="#" th:hx-get="@{/todos/edit/{id}(id=${todo.id})}" title="Edit"
+                                class="btn btn-sm btn-primary">
+                                Edit
+                            </a>
+                            <a href="#" th:hx-delete="@{/todos/delete/{id}(id=${todo.id})}" hx-swap="outerHTML"
+                                hx-target="closest .todo-item" title="Delete" class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
