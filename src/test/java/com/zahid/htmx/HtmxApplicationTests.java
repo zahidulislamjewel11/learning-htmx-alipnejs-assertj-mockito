@@ -1,4 +1,4 @@
-package com.zahid.spring_boot_htmx;
+package com.zahid.htmx;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
