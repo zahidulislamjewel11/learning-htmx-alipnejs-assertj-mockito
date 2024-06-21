@@ -1,6 +1,6 @@
-# Spring HTMX AlpineJS POC
+# Spring HTMX AlpineJS JUnit AssertJ Mockito POC
 
-This project is a proof of concept (POC) for integrating the HTMX and Alpine.js libraries with a Spring Boot application. It showcases how these libraries can be used to enhance the frontend experience with minimal JavaScript code.
+This project is a proof of concept (POC) for integrating the HTMX and Alpine.js libraries with a Spring Boot application, utilizing JUnit, AssertJ, and Mockito for testing. It showcases how these libraries can be used to enhance the frontend experience with minimal JavaScript code and demonstrates effective testing strategies.
 
 ## Project Structure
 
@@ -8,6 +8,9 @@ This project is a proof of concept (POC) for integrating the HTMX and Alpine.js 
 - **Thymeleaf**: The server-side template engine used for rendering HTML.
 - **HTMX**: A library that allows you to access AJAX, CSS Transitions, WebSockets, and Server-Sent Events directly in HTML.
 - **Alpine.js**: A lightweight JavaScript framework for composing behavior directly in your HTML templates.
+- **JUnit**: A testing framework for Java applications.
+- **AssertJ**: A fluent assertion library for Java.
+- **Mockito**: A mocking framework for unit tests in Java.
 
 ## Requirements
 
@@ -41,7 +44,7 @@ Ensure you have the following installed:
     mvn spring-boot:run
     ```
 
-4. Run using custom bash (inclded):
+4. Run using custom bash (included):
     ```bash
     ./run.sh
     ```
@@ -59,6 +62,7 @@ The project uses the following dependencies:
 - **lombok**: Java library that automatically plugs into your editor and build tools, removing boilerplate code.
 - **spring-boot-starter-tomcat**: Provides Tomcat as the default embedded container.
 - **spring-boot-starter-test**: Starter for testing Spring Boot applications.
+- **mockito-core**: Mockito core for creating mock objects.
 - **htmx-spring-boot**: Integration of HTMX with Spring Boot.
 - **htmx-spring-boot-thymeleaf**: HTMX Thymeleaf integration.
 
