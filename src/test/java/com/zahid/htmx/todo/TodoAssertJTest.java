@@ -1,6 +1,5 @@
 package com.zahid.htmx.todo;
 
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.zahid.htmx.model.Todo;
 
-@SpringBootTest
+@SpringBootTest(classes = Todo.class)
 class TodoAssertJTest {
 
     @Test
@@ -17,10 +16,10 @@ class TodoAssertJTest {
         testTodo.setIsCompleted(true);
 
         assertThat(testTodo.getTask())
-            .startsWith("Learning")
-            .endsWith("Application")
-            .contains("Spring Boot")
-            .isEqualTo("Learning JUnit Test for Spring Boot Application");
+                .startsWith("Learning")
+                .endsWith("Application")
+                .contains("Spring Boot")
+                .isEqualTo("Learning JUnit Test for Spring Boot Application");
 
     }
 
@@ -30,7 +29,7 @@ class TodoAssertJTest {
         Todo secondTodo = new Todo(9, "Learning JUnitt");
 
         assertThat(firstTodo)
-            .isEqualTo(secondTodo);
+                .isEqualTo(secondTodo);
     }
 
     @Test
@@ -39,7 +38,7 @@ class TodoAssertJTest {
         Todo assertJTodo = new Todo(11, "Learning AssertJ");
 
         assertThat(testNgTodo)
-            .isNotEqualTo(assertJTodo);
+                .isNotEqualTo(assertJTodo);
     }
 
 }
