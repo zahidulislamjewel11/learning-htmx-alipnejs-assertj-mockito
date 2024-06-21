@@ -13,7 +13,7 @@
     <artifactId>htmx</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>spring-htmx-alipnejs</name>
+    <name>htmx-alipnejs-assertj-mockito</name>
     <description>Demo project for Spring Boot</description>
     <url />
     <licenses>
