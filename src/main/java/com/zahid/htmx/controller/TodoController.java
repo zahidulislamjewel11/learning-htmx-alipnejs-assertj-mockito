@@ -88,6 +88,26 @@ public class TodoController {
         return "todo/todo-fragment :: readonlyTodo";
     }
 
+    @GetMapping("/throw-except")
+    public String throwException(Model model) throws Exception {
+
+        if (true) {
+            throw new Exception("Exception Occured");
+        }
+
+        return null;
+    }
+
+    @GetMapping("/throw-nullptr")
+    public String throwNullPointerException(Model model) throws NullPointerException {
+
+        if (true) {
+            throw new NullPointerException("Null Pointer Exception Occured");
+        }
+
+        return null;
+    }
+
     @HxRequest
     @DeleteMapping("/delete/{id}")
     public HtmxResponse deleteTodo(@PathVariable int id, Model model) {

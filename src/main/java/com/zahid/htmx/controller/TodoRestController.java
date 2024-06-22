@@ -1,6 +1,7 @@
 package com.zahid.htmx.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zahid.htmx.exception.EntityNotFoundException;
 import com.zahid.htmx.model.Todo;
 import com.zahid.htmx.repository.TodoRepository;
 
@@ -29,9 +31,22 @@ public class TodoRestController {
     private TodoRepository todoRepository;
 
     @GetMapping
-    public ResponseEntity<List<Todo>> findAll() {
+    public ResponseEntity<List<Todo>> getAllEntities() {
         List<Todo> todos = todoRepository.findAll();
         return new ResponseEntity<>(todos, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Todo> getEntityById(@PathVariable("id") Integer id) throws NoSuchElementException {
+        List<Todo> todos = todoRepository.findAll();
+
+        Todo fetchedTodo = fetchedTodo = todos.stream()
+        .filter(todo -> todo.getId().equals(id))
+        .findFirst().orElseThrow(() -> new NoSuchElementException("No Element found with id " + id));
+
+        log.info("todo: {}", fetchedTodo);
+
+        return new ResponseEntity<>(fetchedTodo, HttpStatus.OK);
     }
 
     @PostMapping("/add")
