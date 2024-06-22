@@ -10,7 +10,11 @@
     <div layout:fragment="content">
 
         <div class="d-flex justify-content-center align-items-center m-4">
-            <p class="h3" th:text="${message}">Error 500</p>
+            <!-- <p class="h3" th:text="${message}">Error 500</p> -->
+             <div>
+                <h1>Error [[${statusCode}]]</h1>
+                <p class="h3" th:text="${message}">An Exception Occured</p>
+             </div>
         </div>
 
     </div>
