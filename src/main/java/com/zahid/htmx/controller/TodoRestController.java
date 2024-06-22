@@ -30,13 +30,13 @@ public class TodoRestController {
     @Autowired
     private TodoRepository todoRepository;
 
-    @GetMapping
+    @GetMapping("get/all")
     public ResponseEntity<List<Todo>> getAllEntities() {
         List<Todo> todos = todoRepository.findAll();
         return new ResponseEntity<>(todos, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Todo> getEntityById(@PathVariable("id") Integer id) throws NoSuchElementException {
         List<Todo> todos = todoRepository.findAll();
 

@@ -3,22 +3,20 @@
     layout:decorate="~{layout}">
 
 <head>
+    <link rel="stylesheet" th:href="@{/css/exception.css}">
     <title>Exception</title>
 </head>
 
 <body>
     <div layout:fragment="content">
-
-        <div class="d-flex justify-content-center align-items-center m-4">
-            <!-- <p class="h3" th:text="${message}">Error 500</p> -->
-             <div>
-                <h1>Error [[${statusCode}]]</h1>
-                <p class="h3" th:text="${message}">An Exception Occured</p>
-             </div>
+        <div class="container d-flex justify-content-center align-items-start">
+            <div class="error-box">
+                <h1 th:text="'Error ' + ${errorResponse.statusCode}">Error</h1>
+                <p th:text="${errorResponse.message}" style="font-size: 24px; font-weight: bold;"></p>
+                <p class="timestamp" th:text="'Timestamp: ' + ${#temporals.format(errorResponse.timestamp, 'MMMM dd, yyyy hh:mm a')}"></p>
+            </div>
         </div>
-
     </div>
-
 </body>
 
 </html>
