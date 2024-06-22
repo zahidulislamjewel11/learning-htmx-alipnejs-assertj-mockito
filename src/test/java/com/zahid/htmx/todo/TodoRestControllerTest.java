@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -42,7 +43,7 @@ class TodoRestControllerTest {
 
         Mockito.when(todoRepository.findAll()).thenReturn(todos);
 
-        MvcResult mvcResult = mockMvc.perform(get("/api/todos")).andReturn();
+        MvcResult mvcResult = mockMvc.perform(get("/api/todos/get/all")).andReturn();
 
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
@@ -57,7 +58,7 @@ class TodoRestControllerTest {
 
         Mockito.when(todoRepository.findAll()).thenReturn(todos);
 
-        mockMvc.perform(get("/api/todos"))
+        mockMvc.perform(get("/api/todos/get/all"))
                 .andExpect(status().isOk());
 
     }
@@ -69,14 +70,15 @@ class TodoRestControllerTest {
                 new Todo(2, "Exploring AlpineJS"),
                 new Todo(3, "Implementing NGINX as Load Balancer"),
                 new Todo(4, "Integrating SSL"));
-
+    
         Mockito.when(todoRepository.findAll()).thenReturn(todos);
-
-        mockMvc.perform(get("/api/todos"))
+    
+        mockMvc.perform(get("/api/todos/get/all"))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(todos)));
-
     }
+    
 
     @Test
     void testFindAllTodosJsonExpectAll() throws Exception {
@@ -88,7 +90,7 @@ class TodoRestControllerTest {
 
         Mockito.when(todoRepository.findAll()).thenReturn(todos);
 
-        mockMvc.perform(get("/api/todos"))
+        mockMvc.perform(get("/api/todos/get/all"))
                 .andExpectAll(
                         status().isOk(),
                         content().json(objectMapper.writeValueAsString(todos)));
